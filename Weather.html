@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="Weather.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <div class="mainbody">
+        <br>
+    <div class="leftside"></div>
+    <div class="header">
+    <h2>Search for a city:</h2>
+</div>
+    <div id="input-area">
+        <div class="control">
+            <input id="searched-city" class="input" type="text">
+        </div>
+        <div class="control">
+            <button id="search-button" class="button"><img src="searchlogo.jpg" alt="Search" id="gosearch"></button>
+        </div>
+        <div class="Perviouslysearched"></div>
+    </div>
+    <div class="rightside">
+        <div class="data">
+            <div class="facts"></div>
+            <div class="forecast"></div>
+        </div>
+        </div>
+    </div>
+    <script>
+        $("#search-button").on("click", function () {
+            $(".facts").empty()
+            $(".forecast").empty()
+            var searchTerm;
+            searchTerm = $("#searched-city").val()
+            var APIKey = "c621c3ff36d2d0a3f787ac6964f256b4";
+            var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+            "q=" + searchTerm + "&units=imperial&appid=" + APIKey;
+            var searched = $("<button>")
+            var init = $("<p>")
+            init.text(searchTerm)
+            init.attr("class","init")
+            searched.attr("class","searched")
+        
+            searched.append(init)
+            $(".Perviouslysearched").append(searched)
+        $.ajax({
+        url:queryURL,
+        method: "GET"
+        }).then(function(response){
+            console.log(response)
+            let city = $("<h3>");
+            city.text(searchTerm)
+            let temp = $("<p>");
+            let humidity = $("<p>");
+            let windspeed = $("<p>");
+            let uvindex= $("<p>");
+            temp.text("Temperature: " + response.main.temp + "°F")
+            humidity.text("Humidity: " + response.main.humidity + "%")
+            windspeed.text("Windspeed: " + response.wind.speed + " MPH")
+            uvindex.text("UV Index: "  )
+            $(".facts").append(city,temp,humidity,windspeed,uvindex)
+        })
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/forecast?q="+ searchTerm + "&appid=" + APIKey,
+            method:"GET"
+        }).then(function(response) {
+            let head2 = $("<h4>")
+            head2.text("5 Day Forecast")
+            $(".forecast").append(head2)
+            var hey = ""
+            hey += response.list[0].dt_txt[5]
+            hey += response.list[0].dt_txt[6]
+            hey += "/"
+            hey += response.list[0].dt_txt[8] 
+            hey += response.list[0].dt_txt[9] -1
+            hey += "/"
+            hey += response.list[0].dt_txt[0]
+            hey += response.list[0].dt_txt[1]
+            hey += response.list[0].dt_txt[2]
+            hey += response.list[0].dt_txt[3]
+            $(".facts").prepend(hey)
+            for (i=0;i<35;i+=8) {
+            var date = ""
+            
+            date += response.list[i].dt_txt[5]
+            date += response.list[i].dt_txt[6]
+            date += "/"
+            date += response.list[i].dt_txt[8]
+            date += response.list[i].dt_txt[9] 
+            date += "/"
+            date += response.list[i].dt_txt[0]
+            date += response.list[i].dt_txt[1]
+            date += response.list[i].dt_txt[2]
+            date += response.list[i].dt_txt[3]
+           
+            var temp2 = $("<p>")
+            var converttemp = response.list[i].main.temp
+            
+            temp2.text("Temp: " + converttemp)
+            var hum2 = $("<p>")
+            hum2.text("Humdity: " + response.list[i].main.humidity + "%")
+            var box = $("<div>")
+            box.attr("class","fore")
+            box.append(date,temp2,hum2)
+            
+            $(".forecast").append(box)
+            }
+            console.log(response)
+        
+        })
+        })
+    </script>
+</body>
+</html>

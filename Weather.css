@@ -1,0 +1,108 @@
+header {
+    background-color: rgb(53, 53, 58);
+    color: white;
+    
+    position: absolute;
+    float: left;
+    height: 12%;
+    width: 100%;
+    text-align: center;
+    
+}
+body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+#search-button {
+    width: 37px;
+    height: 37px;
+    top: 22%;
+    float: left;
+    left: 25%;
+    position: absolute;
+    overflow: hidden;
+    
+}
+#gosearch {
+    width: 37px;
+    height: 37px;
+    float: left;
+    position: relative;
+    right: 8px;
+    bottom: 2px;
+}
+#searched-city {
+    width: 25%;
+    height: 30px;
+    left: 2%;
+    top: 22%;
+    float: left;
+    position: absolute;
+}
+h2 {
+    color:rgb(53, 53, 58);
+    position: absolute;
+    left: 2%;
+    top: 12%;
+    
+}
+.leftside {
+    background-color: lightgray;
+    height: 88%;
+    width: 30%;
+    float: left;
+    top: 12%;
+    position: absolute;
+}
+.facts {
+    width: 68%;
+    position: absolute;
+    float: right;
+    right:0;
+    top: 12%;
+}
+.forecast {
+    position: absolute;
+    
+    overflow: hidden;
+    width: 70%;
+    height: 40%;
+    left: 30%;
+    top: 60%;
+}
+.fore {
+    height: 60%;
+    width: 15%;
+    background-color: rgb(43, 43, 245);
+    color:white;
+    float: left;
+    margin: 20px;
+    font-size: 130%;
+
+}
+.searched {
+    position: relative;
+    width:100%;
+    height: 10%;
+    background-color: white;
+    
+
+    color: rgb(116, 115, 115);
+}
+.Perviouslysearched {
+    height: 75%;
+    width: 26%;
+    left:2%;
+    top: 29%;
+    position: absolute;
+    overflow: hidden;
+
+}
+.init {
+    position: relative;
+    
+    font-size: 150%;
+    
+}
